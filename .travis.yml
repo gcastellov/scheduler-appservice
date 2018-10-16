@@ -1,0 +1,9 @@
+language: csharp
+mono: none
+dotnet: 2.0
+branches:
+  only:
+    - master
+script:
+ - dotnet build ./src/Scheduler.AppService.sln
+ - dotnet test ./src/Scheduler.Core.UnitTests/Scheduler.Core.UnitTests.csproj

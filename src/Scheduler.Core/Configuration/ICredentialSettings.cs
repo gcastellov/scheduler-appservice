@@ -7,7 +7,6 @@
         string Username { get; }
         string Password { get; }
         string Endpoint { get; }
-        string ResponseType { get; set; }
-        string ResponseTokenPayload { get; set; }
+        string ResponseReader { get; set; }
     }
 }

@@ -1,25 +1,27 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Scheduler.Core.Configuration;
 
 namespace Scheduler.Core.Communication
 {
-    public class HttpRequestorBase : IHttpRequestor
+    public abstract class HttpRequestorBase : IHttpRequestor
     {
         protected readonly HttpClient Client;
         protected readonly ICredentialSettings CredentialSettings;
+        protected readonly IResponseReader ResponseReader;
 
         public string Token { get; protected set; }
 
-        public HttpRequestorBase(ICredentialSettings credentialSettings)
+        protected HttpRequestorBase(ICredentialSettings credentialSettings, IResponseReader responseReader)
         {
             Client = new HttpClient();
             CredentialSettings = credentialSettings;
+            ResponseReader = responseReader;
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
+        public abstract HttpContent CreateAuthorizationContent(string username, string password, string endpoint);
 
         public async Task<HttpResponseMessage> Post(string endpoint)
         {
@@ -33,17 +35,14 @@ namespace Scheduler.Core.Communication
             return response;
         }
 
-        public virtual Task Authorize(string username, string password, string endpoint)
+        public async Task Authorize(string username, string password, string endpoint)
         {
-            throw new NotImplementedException();
-        }
-
-        protected string GetTokenResponse(HttpResponseMessage authResponse)
-        {
-            var content = authResponse.Content.ReadAsStringAsync().Result;
-            var type = Type.GetType(CredentialSettings.ResponseType);
-            var authorization = JsonConvert.DeserializeObject(content, type);
-            return type.GetProperty(CredentialSettings.ResponseTokenPayload).GetValue(authorization).ToString();
+            var content = CreateAuthorizationContent(username, password, endpoint);
+            var response = await Client.PostAsync(endpoint, content);
+            await ResponseReader.GetToken(response).ContinueWith(c =>
+            {
+                Token = c.Result;
+            });
         }
     }
 }

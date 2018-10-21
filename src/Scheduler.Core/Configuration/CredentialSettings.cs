@@ -40,18 +40,11 @@ namespace Scheduler.Core.Configuration
             set => base["endpoint"] = value;
         }
 
-        [ConfigurationProperty("responseType", IsRequired = true)]
-        public string ResponseType
+        [ConfigurationProperty("responseReader", IsRequired = true)]
+        public string ResponseReader
         {
-            get => (string)base["responseType"];
-            set => base["responseType"] = value;
-        }
-
-        [ConfigurationProperty("responseTokenPayload", IsRequired = true)]
-        public string ResponseTokenPayload
-        {
-            get => (string)base["responseTokenPayload"];
-            set => base["responseTokenPayload"] = value;
+            get => (string)base["responseReader"];
+            set => base["responseReader"] = value;
         }
     }
 }

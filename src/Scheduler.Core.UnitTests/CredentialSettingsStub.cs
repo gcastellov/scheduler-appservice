@@ -9,7 +9,6 @@ namespace Scheduler.Core.UnitTests
         public string Username { get; set; }
         public string Password { get; set; }
         public string Endpoint { get; set; }
-        public string ResponseType { get; set; }
-        public string ResponseTokenPayload { get; set; }
+        public string ResponseReader { get; set; }
     }
 }

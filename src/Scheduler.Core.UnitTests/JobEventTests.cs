@@ -27,9 +27,7 @@ namespace Scheduler.Core.UnitTests
                 Type = "jwt",
                 Endpoint = "http://somedomain.com/api/token",
                 Username = "my-username",
-                Password = "my-password",
-                ResponseTokenPayload = "Token",
-                ResponseType = "Scheduler.Core.Communication.AuthorizationResponse, Scheduler.Core"
+                Password = "my-password"
             };
 
             _jobSettings = new JobSettingsStub

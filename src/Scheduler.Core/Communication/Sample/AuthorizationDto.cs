@@ -1,6 +1,6 @@
-﻿namespace Scheduler.Core.Communication
+﻿namespace Scheduler.Core.Communication.Sample
 {
-    public class AuthorizationResponse
+    public class AuthorizationDto
     {
         public bool IsSuccessful { get; set; }
         public string Token { get; set; }

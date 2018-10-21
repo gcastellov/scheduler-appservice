@@ -17,7 +17,7 @@ Currently the project supports the following:
 
 To add new jobs update the app.config file.
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <configSections>
@@ -32,8 +32,7 @@ To add new jobs update the app.config file.
         username="[USERNAME]" 
         password="[PASSWORD]" 
         endpoint="[TOKEN_ENDPOINT]"
-        responseType="Scheduler.Core.Communication.AuthorizationResponse, Scheduler.Core"
-        responseTokenPayload="Token"
+        responseReader="[RESPONSE_READER_FULL_TYPE]"
         />
     </credentials>
   </credentialStorage>
@@ -47,14 +46,16 @@ To add new jobs update the app.config file.
 
 Each job configuration can use a credential configuration. If the job does not require authentication, then leave the job's credentials attribute empty.
 
+Set the **responseReader** attribute with the full type of the IResponseReader implementation to  read the authentication token. The built-in **Scheduler.Core.Communication.ResponseReaders.RawResponseReader** type reads the token from the body content as plain text, while the **Scheduler.Core.Communication.ResponseReaders.DtoResponseReader<T>** can apply some logic to read the token from a certain Dto. The solution provides the *Scheduler.Core.Communication.Sample.AuthorizationDtoReader* as a sample to show this last case.
+
 To choose between different authentication types, update the credential type attribute:
-- Use the keyword 'jwt' for JWT.
-- Use the keyword 'oauth' for OAuth.
+- Use the keyword **jwt** for JWT.
+- Use the keyword **oauth** for OAuth.
 
 
 To configure the Serilog logging implementation, update the appsettings.json by setting the pattern to use or where to store the log files with the desired name format.
 
-```
+```json
 {
   "Logging": {
     "PathFormat": "Logs/{Date}.log",
@@ -80,3 +81,6 @@ To configure the Serilog logging implementation, update the appsettings.json by 
   }
 }
 ```
+
+
+You might have to manually create Logs folder in and set write permission to it with chmod 777 

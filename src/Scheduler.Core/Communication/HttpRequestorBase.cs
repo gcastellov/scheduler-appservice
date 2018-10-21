@@ -6,13 +6,15 @@ using Scheduler.Core.Configuration;
 
 namespace Scheduler.Core.Communication
 {
-    public abstract class HttpRequestorBase : IHttpRequestor
+    public class HttpRequestorBase : IHttpRequestor
     {
         protected readonly HttpClient Client;
         protected readonly ICredentialSettings CredentialSettings;
         protected readonly IResponseReader ResponseReader;
 
         public string Token { get; protected set; }
+
+        public HttpRequestorBase(): this(null, null) { }
 
         protected HttpRequestorBase(ICredentialSettings credentialSettings, IResponseReader responseReader)
         {
@@ -21,8 +23,6 @@ namespace Scheduler.Core.Communication
             ResponseReader = responseReader;
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-
-        public abstract HttpContent CreateAuthorizationContent(string username, string password, string endpoint);
 
         public async Task<HttpResponseMessage> Post(string endpoint)
         {
@@ -44,6 +44,11 @@ namespace Scheduler.Core.Communication
             {
                 Token = c.Result;
             });
+        }
+
+        protected virtual HttpContent CreateAuthorizationContent(string username, string password, string endpoint)
+        {
+            throw new System.NotImplementedException("Must implement this method in case you use authorization");
         }
     }
 }

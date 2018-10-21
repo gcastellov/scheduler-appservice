@@ -13,7 +13,7 @@ namespace Scheduler.Core.Communication
         {
         }
 
-        public override HttpContent CreateAuthorizationContent(string username, string password, string endpoint)
+        protected override HttpContent CreateAuthorizationContent(string username, string password, string endpoint)
         {
             var payload = new { username, password };
             return new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");

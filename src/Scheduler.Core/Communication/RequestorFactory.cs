@@ -10,7 +10,7 @@ namespace Scheduler.Core.Communication
         {
             if (credentialSettings == null)
             {
-                return new HttpRequestor();
+                return new HttpRequestorBase();
             }
 
             var responseReaderType = Type.GetType(credentialSettings.ResponseReader ?? string.Empty);

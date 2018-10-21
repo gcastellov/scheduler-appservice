@@ -12,7 +12,7 @@ namespace Scheduler.Core.Communication
         {
         }
 
-        public override HttpContent CreateAuthorizationContent(string username, string password, string endpoint)
+        protected override HttpContent CreateAuthorizationContent(string username, string password, string endpoint)
         {
             var payload = new Dictionary<string, string>
             {

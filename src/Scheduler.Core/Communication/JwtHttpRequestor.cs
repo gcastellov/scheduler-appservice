@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
+using Scheduler.Core.Communication.ResponseReaders;
 using Scheduler.Core.Configuration;
 
 namespace Scheduler.Core.Communication

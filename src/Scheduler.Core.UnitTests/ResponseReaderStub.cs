@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Scheduler.Core.Communication;
+using Scheduler.Core.Communication.ResponseReaders;
 
 namespace Scheduler.Core.UnitTests
 {

@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using Scheduler.Core.Communication.ResponseReaders;
 using Scheduler.Core.Configuration;
 
 namespace Scheduler.Core.Communication

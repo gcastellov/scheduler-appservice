@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Scheduler.Core.Communication
+namespace Scheduler.Core.Communication.ResponseReaders
 {
     public abstract class DtoResponseReader<T> : IResponseReader where T:class 
     {

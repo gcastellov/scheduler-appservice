@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Scheduler.Core.Communication.ResponseReaders;
 using Scheduler.Core.Configuration;
 
 namespace Scheduler.Core.Communication

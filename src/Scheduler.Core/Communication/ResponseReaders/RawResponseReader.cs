@@ -1,8 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using Scheduler.Core.Communication.ResponseReaders;
 
-namespace Scheduler.Core.Communication
+namespace Scheduler.Core.Communication.ResponseReaders
 {
     public class RawResponseReader : IResponseReader
     {

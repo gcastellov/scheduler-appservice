@@ -17,12 +17,6 @@ namespace Scheduler.AppService
             _scheduler = scheduler;
         }
 
-        //public AppHostedService(ILogger<AppHostedService> logger, IPollas pollas)
-        //{
-        //    _logger = logger;
-        //    pollas.WritePollas();
-        //}
-
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Starting service...");
